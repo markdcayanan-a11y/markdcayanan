@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Vincent D. Cayanan — Portfolio</title>
+<style>
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #37415C;
+    color: #f0ece4;
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: #37415C;
+    border-bottom: 1px solid rgba(253,164,129,0.15);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fda481;
+    letter-spacing: 0.04em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    color: rgba(240,236,228,0.6);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #fda481; }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,164,129,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px 80px 64px;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fda481;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #f0ece4;
+    margin-bottom: 8px;
+  }
+  .hero-name span { color: #fda481; }
+  .hero-title {
+    font-size: 1rem;
+    color: rgba(240,236,228,0.5);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    margin-bottom: 28px;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(240,236,228,0.72);
+    max-width: 420px;
+    margin-bottom: 40px;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 14px 36px;
+    background: #fda481;
+    color: #37415C;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-cta:hover { background: #fc8f61; transform: translateY(-2px); }
+
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 48px;
+    position: relative;
+  }
+
+  .avatar-initials {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: #fda481;
+    opacity: 0.9;
+  }
+  img {
+    width: 100%;
+    height: 50%;
+    margin-bottom: 5%;
+  }
+  .location-tag {
+    position: absolute;
+    bottom: 80px; right: 40px;
+    background: rgba(253,164,129,0.12);
+    border: 1px solid rgba(253,164,129,0.25);
+    padding: 10px 18px;
+    border-radius: 24px;
+    font-size: 0.78rem;
+    color: rgba(240,236,228,0.7);
+    letter-spacing: 0.05em;
+  }
+
+  section {
+    padding: 100px 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fda481;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #f0ece4;
+    margin-bottom: 48px;
+    line-height: 1.15;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(253,164,129,0.12);
+    margin: 0 auto;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(240,236,228,0.72);
+  }
+  .beliefs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+  }
+  .beliefs li {
+    padding: 16px 20px;
+    border-left: 2px solid #fda481;
+    background: rgba(253,164,129,0.06);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(240,236,228,0.75);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .edu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .edu-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 28px;
+    border: 1px solid rgba(253,164,129,0.15);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.03);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .edu-item:hover {
+    border-color: rgba(253,164,129,0.4);
+    background: rgba(253,164,129,0.05);
+  }
+  .edu-level {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fda481;
+    font-weight: 600;
+    text-align: center;
+  }
+  .edu-school {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f0ece4;
+  }
+  .edu-note {
+    font-size: 0.82rem;
+    color: rgba(240,236,228,0.5);
+    margin-top: 4px;
+  }
+
+  .skills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .skill-tag {
+    padding: 10px 22px;
+    border: 1px solid rgba(253,164,129,0.3);
+    border-radius: 2px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    color: rgba(240,236,228,0.75);
+    font-weight: 400;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-tag:hover {
+    background: #fda481;
+    color: #37415C;
+    border-color: #fda481;
+    font-weight: 600;
+  }
+
+  .lang-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .lang-card {
+    padding: 32px 16px;
+    text-align: center;
+    border: 1px solid rgba(253,164,129,0.2);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.2s;
+  }
+  .lang-card:hover {
+    border-color: #fda481;
+    background: rgba(253,164,129,0.06);
+    transform: translateY(-4px);
+  }
+  .lang-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f0ece4;
+  }
+
+  .hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .hobby-card {
+    padding: 28px 20px;
+    background: rgba(253,164,129,0.06);
+    border: 1px solid rgba(253,164,129,0.15);
+    border-radius: 6px;
+    text-align: center;
+    transition: all 0.25s;
+  }
+  .hobby-card:hover {
+    background: rgba(253,164,129,0.12);
+    border-color: rgba(253,164,129,0.4);
+    transform: translateY(-4px);
+  }
+  .hobby-name {
+    font-size: 0.85rem;
+    color: rgba(240,236,228,0.75);
+    font-weight: 500;
+  }
+
+  .noline { text-decoration: none; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .project-card {
+    padding: 28px 32px;
+    border: 1px solid rgba(253,164,129,0.15);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.025);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+  .project-card:hover {
+    border-color: rgba(253,164,129,0.4);
+    background: rgba(253,164,129,0.05);
+  }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f0ece4;
+    margin-bottom: 4px;
+  }
+  .project-sub {
+    font-size: 0.78rem;
+    color: rgba(240,236,228,0.45);
+    letter-spacing: 0.06em;
+  }
+  .project-badge {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .badge-view { background: rgba(253,164,129,0.2); color: #fda481; }
+  .badge-updated { background: rgba(253,164,129,0.35); color: #fda481; }
+  .badge-ongoing { background: rgba(240,236,228,0.1); color: rgba(240,236,228,0.5); }
+  .badge-soon { background: rgba(55,65,92,0.8); border: 1px solid rgba(253,164,129,0.2); color: rgba(240,236,228,0.4); }
+
+  .contact-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border: 1px solid rgba(253,164,129,0.25);
+    border-radius: 4px;
+    text-decoration: none;
+    color: rgba(240,236,228,0.75);
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .contact-btn:hover {
+    background: #fda481;
+    color: #37415C;
+    border-color: #fda481;
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(253,164,129,0.1);
+    font-size: 0.78rem;
+    color: rgba(240,236,228,0.3);
+    letter-spacing: 0.08em;
+  }
+
+
+  @media (max-width: 992px) {
+    nav { padding: 18px 24px; }
+    .nav-links { gap: 20px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 60px 32px; text-align: center; align-items: center; }
+    .hero-desc { max-width: 100%; }
+    .hero-visual { padding: 40px 32px; }
+    .location-tag { bottom: 20px; right: 20px; }
+    section { padding: 60px 32px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .hobbies-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    nav { flex-direction: column; gap: 16px; padding: 16px 20px; }
+    .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .nav-links a { font-size: 0.72rem; }
+    .hero { padding-top: 120px; }
+    .hero-text { padding: 40px 20px; }
+    .hero-name { font-size: clamp(2rem, 8vw, 2.8rem); }
+    .hero-visual { padding: 20px; }
+    .location-tag { position: relative; bottom: auto; right: auto; margin-top: 20px; }
+    section { padding: 50px 20px; }
+    .section-title { font-size: 2rem; margin-bottom: 32px; }
+    .edu-item { grid-template-columns: 1fr; gap: 12px; text-align: center; }
+    .edu-level { text-align: center; }
+
+    
+    .lang-cards { grid-template-columns: 1fr; gap: 12px; }
+    .lang-card { padding: 20px 16px; }
+
+    .project-card { flex-direction: column; align-items: flex-start; padding: 20px; gap: 12px; }
+
+    
+    .contact-row { grid-template-columns: 1fr; }
+    .contact-btn { font-size: 0.82rem; }
+
+    footer { padding: 30px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links { gap: 12px; }
+    .nav-links a { font-size: 0.68rem; letter-spacing: 0.08em; }
+    .hero-eyebrow { font-size: 0.68rem; }
+    .hero-title { font-size: 0.9rem; }
+    .hero-desc { font-size: 0.88rem; }
+    .hero-cta { padding: 12px 28px; font-size: 0.8rem; }
+    .section-title { font-size: 1.7rem; }
+    .skill-tag { padding: 8px 16px; font-size: 0.78rem; }
+    .hobbies-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .hobby-card { padding: 20px 12px; }
+    .hobby-name { font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">My Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Enterprise Data Management Portfolio</p>
+    <h1 class="hero-name">Mark Vincent<br>De Leon Cayanan.</h1>
+    <p class="hero-title">BS Information Technology · PSAU</p>
+    <p class="hero-desc">Aspiring IT professional passionate about programming, systems, and digital innovation — building skills one project at a time.</p>
+    <a href="#contact" class="hero-cta">Contact Me Here</a>
+  </div>
+  <div class="hero-visual">
+    <div class="avatar-ring">
+      <span class="avatar-initials"><img src="kram.svg"></span>
+    </div>
+    <div class="location-tag">Magalang, Pampanga, PH</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="about">
+  <p class="section-label">Who Am I?</p>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-grid">
+    <p class="about-body">
+      My name is <strong style="color:#fda481;">Mark Vincent De Leon Cayanan</strong>, an 18-year-old First Year student taking Bachelor of Science in Information Technology at PSAU. Born on April 20, 2007, I currently live in Magalang, Sta. Lucia, San Isidro. My dream is to build a successful career in the IT industry, where I can apply my skills, continuously grow, and contribute to meaningful technological advancements.
+    </p>
+    <ul class="beliefs">
+      <li>Success is built through hard work, consistency, and a strong mindset.</li>
+      <li>Growth happens through challenges, practice.</li>
+      <li>I believe in myself and my dream of becoming a successful IT professional.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-list">
+    <div class="edu-item">
+      <span class="edu-level">College</span>
+      <div>
+        <div class="edu-school">Pampanga State Agricultural University</div>
+        <div class="edu-note">BS Information Technology · 1st Year</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <span class="edu-level">SHS</span>
+      <div>
+        <div class="edu-school">Jocson College Inc.</div>
+        <div class="edu-note">General Academic Strand (GAS)</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <span class="edu-level">JHS</span>
+      <div>
+        <div class="edu-school">Jocson College Inc.</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <span class="edu-level">Elem</span>
+      <div>
+        <div class="edu-school">Christ In You Faith Christian Academy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <p class="section-label">Capabilities</p>
+  <h2 class="section-title">Skills & Languages</h2>
+  <div class="skills-wrap" style="margin-bottom: 56px;">
+    <span class="skill-tag">Analytical</span>
+    <span class="skill-tag">Reliable</span>
+    <span class="skill-tag">Communicative</span>
+    <span class="skill-tag">Logical</span>
+    <span class="skill-tag">Problem Solving</span>
+    <span class="skill-tag">Motivated</span>
+    <span class="skill-tag">Collaborative</span>
+  </div>
+  <p class="section-label" style="margin-bottom:20px;">Programming Languages & Technical</p>
+  <div class="lang-cards">
+    <div class="lang-card">
+      <div class="lang-name">Java</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">Python</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">HTML & CSS</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects">
+  <p class="section-label">Work</p>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-label" style="margin-bottom: 16px;">Midterms</p>
+  <div class="projects-grid" style="margin-bottom: 32px;">
+    <div class="project-card">
+      <div>
+        <div class="project-title">Lab Task 1</div>
+        <div class="project-sub">Resume Using HTML</div>
+      </div>
+      <a href="taskOneResume.html" class="noline"><span class="project-badge badge-view">View</span></a>
+      <a href="https://hastebin.ianhon.com/411d" class="noline"><span class="project-badge badge-view">View Code</span></a>
+    </div>
+    <div class="project-card">
+      <div>
+        <div class="project-title">Lab Task 2</div>
+        <div class="project-sub">List And Table</div>
+      </div>
+      <a href="TaskTwoListAndTable.html" class="noline"><span class="project-badge badge-view">View</span></a>
+      <a href="https://hastebin.ianhon.com/21f9" class="noline"><span class="project-badge badge-view">View Code</span></a>
+    </div>
+    <div class="project-card">
+      <div>
+        <div class="project-title">Lab Task 3</div>
+        <div class="project-sub">HTML Forms</div>
+      </div>
+      <a href="TaskThreeForms.html" class="noline"><span class="project-badge badge-view">View</span></a>
+      <a href="https://hastebin.ianhon.com/5692" class="noline"><span class="project-badge badge-view">View Code</span></a>
+    </div>
+    <div class="project-card">
+      <div>
+        <div class="project-title">Lab Task 4</div>
+        <div class="project-sub">Image Maps</div>
+      </div>
+      <a href="TaskFourImage.html" class="noline"><span class="project-badge badge-view">View</span></a>
+      <a href="https://hastebin.ianhon.com/95b3" class="noline"><span class="project-badge badge-view">View Code</span></a>
+    </div>
+    <div class="project-card">
+      <div>
+        <div class="project-title">Lab Task 5</div>
+        <div class="project-sub">Resume With CSS</div>
+      </div>
+      <a href="TaskFiveWithCss.html" class="noline"><span class="project-badge badge-view">View</span></a>
+      <a href="https://hastebin.ianhon.com/eaf" class="noline"><span class="project-badge badge-view">View Code</span></a>
+    </div>
+    <div class="project-card">
+      <div>
+        <div class="project-title">Lab Task 6</div>
+        <div class="project-sub">Semantic</div>
+      </div>
+      <a href="TaskSixSemantic.html" class="noline"><span class="project-badge badge-view">View</span></a>
+      <a href="https://hastebin.ianhon.com/24b9" class="noline"><span class="project-badge badge-view">View Code</span></a>
+    </div>
+  </div>
+  <p class="section-label" style="margin-bottom: 16px;">Finals</p>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div>
+        <div class="project-title">Final Task 1</div>
+        <div class="project-sub">Finals</div>
+      </div>
+      <span class="project-badge badge-soon">On Going</span>
+    </div>
+    <div class="project-card">
+      <div>
+        <div class="project-title">Final Task 2</div>
+        <div class="project-sub">Finals</div>
+      </div>
+      <span class="project-badge badge-soon">Coming Soon</span>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="hobbies">
+  <p class="section-label">Outside Code</p>
+  <h2 class="section-title">Hobbies</h2>
+  <div class="hobbies-grid">
+    <div class="hobby-card">
+      <div class="hobby-name">Rubik's Cube</div>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-name">Listening to Music</div>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-name">Table Tennis</div>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-name">Watching Movies</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <p class="section-label">Contact Me Here</p>
+  <h2 class="section-title">Contact Me</h2>
+  <div class="contact-row">
+    <a href="mailto:markdcayanan@gmail.com" class="contact-btn">
+      <span></span> Gmail
+    </a>
+    <a href="https://www.facebook.com/markkram.cayanan" target="_blank" class="contact-btn">
+      <span></span> Facebook
+    </a>
+    <a href="https://www.instagram.com/mrkymll" target="_blank" class="contact-btn">
+      <span></span> Instagram
+    </a>
+    <a href="https://www.tiktok.com/@markdcayanan5" target="_blank" class="contact-btn">
+      <span></span> TikTok
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Mark Vincent D. Cayanan · PSAU · Enterprise Data Management Portfolio
+</footer>
+
+</body>
+</html>
